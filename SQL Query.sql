@@ -1,5 +1,4 @@
-/*Task 4 */
-/*Tables creation */
+/*create tables */
 CREATE TABLE `product` (
 `ProductID` varchar(50) NOT NULL,
 `ProductType` varchar(50) NOT NULL,
@@ -54,7 +53,7 @@ CONSTRAINT `product_discount_ibfk_3` FOREIGN KEY (`MemberID`) REFERENCES `member
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-/*Data insertion */
+/*populate DB */
 insert into `product`(`ProductID`, `ProductType`, `PackageType`, `YearProduced`, `Price`, `Brand`) values 
 ('1','wine','bottle','2010','899.00','Penfolds Grange 2010'),
 ('2','wine','bottle','2016','848.99','Penfolds Grange 2016'),
@@ -97,6 +96,7 @@ insert into `product_discount` (`CampaignID`,`ProductID`,`MemberID`,`Discount`) 
 ('3','1','4','20.00'),
 ('5','2','3','10.00');
 
+-- Check new entries of all tables
 select * from product;
 select * from product_stock;
 select * from campaign;
@@ -104,15 +104,17 @@ select * from member;
 select * from membership;
 select * from product_discount;
 
-/* Task 5 */
--- Query 1
+/* Query */
+-- Query 1: List the branches (ID) of MA that have in stock	at least 5 bottles of Penfold Grange 2010
+
 select pt.BrandID
 from product p, product_stock pt
 where p.ProductID = pt.ProductID 
 and p.Brand = 'Penfolds Grange 2010'
 and pt.StockLevel >= 5;
 
--- Query 2
+-- Query 2: Ethan plans to do some last-minute Christmas shopping on 24/12/2021. List details of each beer that	she will be entitled to	get	20%	discount on.
+
 select * 
 from product p1 
 where p1.ProductID in  
@@ -128,7 +130,10 @@ and p2.ProductType = 'beer'
 and pd.Discount = '20.00'
 and '2021-12-24' >= c.CampaignStartDate and '2021-12-24' <= c.CampaignEndDate);
 
--- Query 3
+-- Query 3: Generate a list	of all email addresses of members whose	card will expire in the	month after	the	coming	month.	
+-- Thus, for instance, if the query	is run in November 2021, it	will list the emails of all	members	whose membership will expire in	January 2022
+-- The emails should be	ordered	by Branch ID, then	by expiry date, and	then by	the	email address, all in ascending	order. 
+
 select distinct m.eMail
 from member m, membership ms
 where m.MemberID = ms.MemberID
@@ -136,7 +141,8 @@ and ms.MemberExpDate >= '2021-11-01'
 and ms.MemberExpDate <='2021-11-30'
 order by ms.BrandID asc, ms.MemberExpDate asc, m.eMail asc;
 
--- Query 4
+-- Query 4: Determine how many times Penfold Grange	2010 has gone on sale since	Covid-19 related lockdown started (assume it to	be March 01, 2020).
+
 select p.Brand, count(pd.ProductID) as 'Number of Sales' 
 from product p, campaign c, product_discount pd 
 where pd.ProductID = p.ProductID 
