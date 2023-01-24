@@ -1,4 +1,5 @@
 USE magicale;
+
 select * from Product;
 select * from Campaign;
 select * from Membership;
