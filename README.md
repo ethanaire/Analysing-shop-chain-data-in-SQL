@@ -9,10 +9,13 @@ All sql files are produced to create tables based on a suitable schema and then 
 **basicQuery:**
 
 *Q1.* List the branches (ID) of MA that have in stock at least 5 bottles of Penfold Grange 2010.
+
 *Q2.* Simone Singh plans to do some last-minute Christmas shopping on 24/12/2021. List details of each beer that she will be entitled to get 20% discount on.
+
 *Q3.* Generate a list of all email addresses of members whose card will expire in the month after the coming month. Thus, for instance, if the query is run in November
 2121, it will list the emails of all members whose membership will expire in January 2122. The emails should be ordered by Branch ID, then by expiry date, and then by
 the email address, all in ascending order.
+
 *Q4.* Determine how many times Penfold Grange 2010 has gone on sale since Covid-19 related lockdown started (assume it to be March 01, 2020).
 
 **advancedQuery:**
