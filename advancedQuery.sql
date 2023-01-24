@@ -1,12 +1,11 @@
 USE magicale;
--- Task 1
 select * from Product;
 select * from Campaign;
 select * from Membership;
 select * from DiscountDetails;
 select * from Branch;
 
--- Task 2
+-- Task 1:
 DELIMITER // 
 DROP TRIGGER IF EXISTS CHECK_MEMBERSHIP_UPDATE //
 CREATE TRIGGER CHECK_MEMBERSHIP_UPDATE 
@@ -35,7 +34,7 @@ BEGIN
 END //
 DELIMITER ;
 
--- Task 3
+-- Task 2:
 DELIMITER //
 DROP PROCEDURE IF EXISTS BrandNameCampaign //
 CREATE PROCEDURE BrandNameCampaign(IN brandName VARCHAR(30))
